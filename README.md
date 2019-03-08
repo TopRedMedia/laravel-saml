@@ -20,7 +20,7 @@ The configuration is done in the config/topredmedia-saml.php file. The file is s
 
 ### Route Prefix
 
-The route prefix entry is appended to each route and defaults to `saml`. 
+The route prefix entry is prepended to each route and defaults to `saml`. 
 
 ### Endpoints
 
@@ -32,7 +32,21 @@ All settings in the default array will internally be copied to each endpoint def
 
 ## Usage
 
-Enter the information from the desired ISP directly into the configuration file or create appropriate env variables for that. Just have a look at the sample endpoint. 
+### Short track
+
+You do not neew to alter the routes or Controller. Just listen for the TopRedMedia\SAML\UserLoggedInEvent or TopRedMedia\SAML\UserLoggedOutEvent events.
+
+### In detail
+
+The package creates five routes for each endpoint. For the prefix `saml` and the endpoints `google` that would be:
+
+* /saml/google/login - Used to start the login process
+* /saml/google/logout - Used to start the logout process
+* /saml/google/metadata - The entity ID URI used to create the SP on the ISP side. 
+* /saml/google/sls - URL used internally in the SAML process.
+* /saml/google/acs - URL used internally in the SAML process.
+ 
+Enter the information from the desired ISP directly into the configuration file or create appropriate env variables for that. Just have a look at the sample endpoint how you could do that.  
 
 If the user successfully authenticates, the ISPController will dispatch a TopRedMedia\SAML\UserLoggedInEvent. It contains a TopRedMedia\SAML\SAMLUser object, which has all the needed information for you to check if a user exists or should be created. Just create your Listener, handle the event and you are done. A dumped event may have these values (depending on the attributes you define). Note that it has the user object, which itself has an instance of SAMLAuth and the endpoint key.
 
