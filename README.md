@@ -1,4 +1,4 @@
-# Laravel SAML SP package
+# Laravel SAML package
 
 This package makes it possible to define multiple service provider, that could be used to authenticate your Laravel Users.   
 

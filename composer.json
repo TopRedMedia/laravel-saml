@@ -2,6 +2,9 @@
   "name": "topredmedia/laravel-saml",
   "description": "Integrate the SAML protocol to your site to be able to act as service provider and let your users authenticate to another ISP",
   "type": "project",
+  "license": "MIT",
+  "version": "1.0.0",
+  "homepage": "https://github.com/TopRedMedia/laravel-saml",
   "authors": [
     {
       "name": "Mirko Haaser",
@@ -10,7 +13,6 @@
       "role": "Developer"
     }
   ],
-  "homepage": "https://github.com/TopRedMedia/laravel-saml",
   "autoload": {
     "psr-4": {
       "TopRedMedia\\SAML\\": "src/"
