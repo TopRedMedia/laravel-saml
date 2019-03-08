@@ -44,7 +44,6 @@ class SAMLServiceProvider extends ServiceProvider
         Route::prefix(config('topredmedia-saml.route_prefix'))
             ->namespace('TopRedMedia\SAML\Controllers')
             ->group(function () {
-                Route::get('{isp}/info', 'ISPController@info');
                 Route::get('{isp}/login', 'ISPController@login');
                 Route::get('{isp}/logout', 'ISPController@logout');
                 Route::get('{isp}/metadata', 'ISPController@metadata');

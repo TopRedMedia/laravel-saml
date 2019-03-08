@@ -18,30 +18,30 @@ return [
     'endpoints' => [
 
         // Each ISP that we will connect, identified by a key. The key is used in the url.
-        'sample' => [
+        'google' => [
 
             // Service Provider Data that we are deploying
             'sp' => [
                 // Usually x509cert and privateKey of the SP are provided by files placed at
                 // the certs folder. But we can also provide them with the following parameters
-                'x509cert' => env('TOPREDMEDIA_SAML_SAMPLE_SP_X509CERT',''),
-                'privateKey' => env('TOPREDMEDIA_SAML_SAMPLE_SP_PRIVATEKEY',''),
+                'x509cert' => '',
+                'privateKey' => '',
             ],
 
             // Identity Provider Data that we want connect with our SP
             'idp' => [
                 // Identifier of the IdP entity  (must be a URI)
-                'entityId' => env('TOPREDMEDIA_SAML_SAMPLE_IDP_ENTITYID',''),
+                'entityId' => "https://accounts.google.com/o/saml2?idpid=C03fimywe",
 
                 // SSO endpoint info of the IdP. (Authentication Request protocol)
                 'singleSignOnService' => [
                     // URL Target of the IdP where the SP will send the Authentication Request Message,
                     // using HTTP-Redirect binding.
-                    'url' => env('TOPREDMEDIA_SAML_SAMPLE_IDP_SSO_URL',''),
+                    'url' => 'https://accounts.google.com/o/saml2/idp?idpid=C03fimywe',
                 ],
 
                 // Public x509 certificate of the IdP
-                'x509cert' => env('TOPREDMEDIA_SAML_SAMPLE_IDP_X509CERT',''),
+                'x509cert' => 'MIIDdDCCAlygAwIBAgIGAWlSWJf5MA0GCSqGSIb3DQEBCwUAMHsxFDASBgNVBAoTC0dvb2dsZSBJbmMuMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MQ8wDQYDVQQDEwZHb29nbGUxGDAWBgNVBAsTD0dvb2dsZSBGb3IgV29yazELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEwHhcNMTkwMzA2MDkzMjExWhcNMjQwMzA0MDkzMjExWjB7MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEPMA0GA1UEAxMGR29vZ2xlMRgwFgYDVQQLEw9Hb29nbGUgRm9yIFdvcmsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkFHlHAs3DzooHNiwmIZmqkb3xOmi8humrYDbtuZSAvvIjylgqg0cEeKHQwQCAM31CeJIfLHnk0Cs5aZiK1BjG0WssdlbG81MtIBwNusJJXkG/CIFrSvLEIvOiaD5CT+tOyIvIQS0vVvzEj7v0TWW+pkC2D6aehazjAM/sXrszT0TkIqTHqrfxInYAfo8BZyRrbn6/tQ6icK5jMJA5mjs/2poLsg39gCBgTR1SL6JhIf75b7X4H1FcqsZEjJtADKMON5cMK3O0hgiUCHh4a53yC7ia8vAHc3TY770Q+u6AyWHAq9I2dHRKQU1/CCF+8enHuBsdYGgl+1+gTfNroSMnQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQB0YW4jnebUF7shdmk74Rwmur5uiDtnsAx/5QG7w+CGNu3moM84MBsOLbID+WTL9ILsmpvw8vbrFXUIDSFikx9UdguyaUKR2cGaCiedwU7Eiqnj2GHQ6QeMKA1grTS1yH0mixfMo+NeeSVbyaJdxgw97HD7FcIyqrXfHA6YYJ0feS/FaP6lG84I3UxL6q8Y2YuS9AxKj1j+Tx7L5XbBqAIduIGfoFtixnqAMdg/+oqcJghlgOYnq2gJ7weBceJ5PZXczp9gbDXdTqGM2l+nz4HC9Tcuw7EhhMQ7KtW0J4gpb10/Vcv2KW2kjS4F4uqvIQEZ2T+ZzpddhTxKMvTUV4ib',
             ],
         ],
     ],
@@ -61,7 +61,7 @@ return [
         // or unencrypted messages if it expects them signed or encrypted
         // Also will reject the messages if not strictly follow the SAML
         // standard: Destination, NameId, Conditions ... are validated too.
-        'strict' => true, //@todo: make this depend on laravel config
+        'strict' => true,
 
         // Enable debug mode (to print errors)
         'debug' => env('APP_DEBUG', false),
@@ -71,6 +71,10 @@ return [
         // your application is running behind a load balancer which terminates
         // SSL.
         'proxyVars' => false,
+
+        // Indicates how the parameters will be
+        // retrieved from the sls request for signature validation
+        'retrieveParametersFromServer' => false,
 
         // Service Provider Data that we are deploying
         'sp' => [
@@ -89,6 +93,13 @@ return [
                 'url' => '',
             ],
         ],
+
+
+        // Which route to show on error messages
+        'errorRoute' => '/route/to/display/error',
+
+        // Where to redirect after logout
+        'logoutRoute' => '/route/after/logout',
 
         // Security settings
         'security' => [
