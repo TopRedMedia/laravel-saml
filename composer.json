@@ -3,7 +3,6 @@
   "description": "Integrate the SAML protocol to your site to be able to act as service provider and let your users authenticate to another ISP",
   "type": "project",
   "license": "MIT",
-  "version": "1.0.0",
   "homepage": "https://github.com/TopRedMedia/laravel-saml",
   "authors": [
     {
