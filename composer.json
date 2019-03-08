@@ -18,7 +18,10 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=7.0.0",
+    "ext-openssl": "*",
+    "illuminate/support": ">=5.5.0",
+    "onelogin/php-saml": "^3.0.0"
   },
   "require-dev": {},
   "branch-alias": {
